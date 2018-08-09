@@ -46,11 +46,13 @@ public abstract class BaseServlet extends HttpServlet {
         Method method = null;
         //执行方法的返回值
         Object result = null;
+        System.out.println(methodName+"-------------");
         if (methodName == null || "".equals(methodName)) {
             result = execute(requset, response);//统一返回到主页面
         } else {//证明有方法 先确定是哪个Servlet
                 //找到方法
                 try {
+                    System.out.println("ssssssss");
                     method = getServletClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
                     result = method.invoke(this, requset, response);
                     System.out.println("=====》获取了需要返回的页面+result");
@@ -69,7 +71,7 @@ public abstract class BaseServlet extends HttpServlet {
         System.out.println("====没有返回值");
     }else{//要么Json要么字符串
         if(result instanceof  String ){
-            String viewName=result.toString()+"jsp";
+            String viewName=result.toString()+".jsp";
             System.out.println("最终的跳转页面====》"+viewName);
             requset.getRequestDispatcher(viewName).forward(requset,response);
         }else{
