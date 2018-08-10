@@ -59,4 +59,12 @@ public class ResultUtil {
     public void setData(Object data) {
         this.data = data;
     }
+
+    /**
+     * 成功的方法
+     */
+    public ResultUtil resultSuccess(){
+        this.status=1;
+        return  this;
+    }
 }

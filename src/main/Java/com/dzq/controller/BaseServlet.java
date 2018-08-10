@@ -88,6 +88,6 @@ public abstract class BaseServlet extends HttpServlet {
     }
 
     private Object execute(HttpServletRequest requset, HttpServletResponse response) {
-  return "main";
+  return "main";//返回主页面
    }
 }
