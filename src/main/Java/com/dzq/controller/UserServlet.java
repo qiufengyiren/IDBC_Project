@@ -20,23 +20,20 @@ public class UserServlet extends  BaseServlet {
     private UserService userService;
     private ResultUtil util=new ResultUtil();
     //当用户访问我们这个Servlet的时候先执行init
+
+
     @Override
-    public void init(ServletConfig config) throws ServletException {
-        userService = (UserService) ServiceFactory.getServiceImpl("userService");
+    public void init() throws ServletException {
+        userService=(UserService) ServiceFactory.getServiceImpl("userService");
     }
 
     @Override
     public Class getServletClass() {
-        System.out.println("=====02:UserServlet==>getServletClass");
         return UserServlet.class;
     }
 
     /**
      * 用户注册的方法
-     *
-     * @param requset
-     * @param response
-     * @return
      */
     public String register(HttpServletRequest requset, HttpServletResponse response) {
         //获取用户登录用户名很密码
@@ -63,7 +60,6 @@ public class UserServlet extends  BaseServlet {
 
 
     public String login(HttpServletRequest requset, HttpServletResponse response){
-        System.out.println("====>UserSerclet ===>login");
         //获取用户登录用户名很密码
         String userName=requset.getParameter("username");
         String password =requset.getParameter("password");

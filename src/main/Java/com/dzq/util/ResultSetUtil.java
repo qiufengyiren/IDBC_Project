@@ -23,6 +23,7 @@ public class ResultSetUtil {
         }
         return object;
     }
+
     //给集合对象赋值
     public static <T> List<T>  eachList(ResultSet rs, Class<T> clazz) {
         List<T> list= new ArrayList<>();

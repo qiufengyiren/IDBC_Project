@@ -4,7 +4,6 @@ import com.dzq.bean.Users;
 import com.dzq.util.BaseDao;
 import com.dzq.util.PageUtil;
 import com.dzq.util.ResultSetUtil;
-import com.dzq.util.ResultUtil;
 
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -16,8 +15,6 @@ import java.util.List;
 public class UserDaoImpl extends BaseDao implements UserDao{
     /**
      * 注册功能
-     * @param users
-     * @return
      */
     @Override
     public int add(Users users) {
@@ -27,8 +24,6 @@ public class UserDaoImpl extends BaseDao implements UserDao{
     }
     /**
      * 验证用户名是否存在的操作/密码是否正确
-     * @param username
-     * @return
      */
     @Override
     public String validateName(String username) {
@@ -58,9 +53,15 @@ public class UserDaoImpl extends BaseDao implements UserDao{
         users = ResultSetUtil.eachOne(rs,Users.class);
         return users;
     }
+
+    /**
+     * 删除记录数
+     */
     @Override
     public int deleteByCondition(Serializable id) {
-        return 0;
+        String sql="DELETE FROM `user` WHERE id=?";
+        int num=executeUpdate(sql,id);
+        return num;
     }
 
     @Override
@@ -78,14 +79,36 @@ public class UserDaoImpl extends BaseDao implements UserDao{
         return null;
     }
 
+    /**
+     * 查询总记录数
+     */
     @Override
     public int findRownum() {
-        return 0;
+        String sql="SELECT COUNT(1) AS COUNT FROM `user`";
+        rs=executeQuery(sql);
+        int count=0;
+        try {
+            if(rs.next()){
+                count=rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 
+    /**
+     *
+     * （当前页-1）*pageSize
+     *   limit  ?,2
+     */
     @Override
     public List<Users> findAllByPage(PageUtil util, Object... params) {
-        return null;
+        String sql="SELECT `id` AS `id`,`username`,`password`,`userType` FROM `user` LIMIT ?,?";
+        Object[] objects={(util.getPageIndex()-1)*util.getPageSize(),util.getPageSize()};
+        rs=executeQuery(sql,objects);
+        List<Users> list=ResultSetUtil.eachList(rs,Users.class);
+        return list;
     }
 
 

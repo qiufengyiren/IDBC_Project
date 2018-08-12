@@ -1,7 +1,14 @@
 package com.dzq.util;
 
-public class PageUtil {
-    private int pageIndex; //当前页
+import java.util.List;
+
+public class PageUtil<E> {
+
+    /**
+     * 分页需要携带的数据集合
+     */
+    private List<E> list;
+    private int pageIndex=1; //当前页
     private int pageSize=2; //页大小
     private int pageCount; //总页数
     private int totalCount; //总记录数
@@ -20,7 +27,7 @@ public class PageUtil {
         return pageIndex;
     }
     public void setPageIndex(int pageIndex) {
-        this.pageIndex = pageIndex;
+        this.pageIndex = (pageIndex==0)?1:pageIndex;
     }
     public int getPageSize() {
         return pageSize;
@@ -37,6 +44,8 @@ public class PageUtil {
     public int getTotalCount() {
         return totalCount;
     }
+    public List<E> getList() { return list; }
+    public void setList(List<E> list) { this.list = list; }
 
     public PageUtil(int pageIndex, int pageSize, int pageICount, int totalCount) {
         this.pageIndex = pageIndex;
@@ -46,12 +55,14 @@ public class PageUtil {
     }
     public PageUtil() {
     }
+
     @Override
     public String toString() {
         return "PageUtil{" +
-                "pageIndex=" + pageIndex +
+                "list=" + list +
+                ", pageIndex=" + pageIndex +
                 ", pageSize=" + pageSize +
-                ", pageICount=" + pageCount +
+                ", pageCount=" + pageCount +
                 ", totalCount=" + totalCount +
                 '}';
     }

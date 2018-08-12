@@ -1,6 +1,7 @@
 package com.dzq.bean;
 
 public class Users {
+    private Integer id;//用户id
     private String userName;//用户名
     private String password;//密码
     private  int UserType;//类型
@@ -21,20 +22,6 @@ public class Users {
         this.userName = userName;
     }
 
-
-    public Users(){
-
-    }
-
-    @Override
-    public String toString() {
-        return "Users{" +
-                "userName='" + userName + '\'' +
-                ", password=" + password +
-                ", UserType=" + UserType +
-                '}';
-    }
-
     public String getPassword() {
         return password;
     }
@@ -43,7 +30,27 @@ public class Users {
         this.password = password;
     }
 
-    public Users(String userName, String password, int userType) {
+    public Integer getId() { return id; }
+
+    public void setId(Integer id) { this.id = id; }
+
+    public Users(){
+
+    }
+
+    @Override
+    public String toString() {
+        return "Users{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", UserType=" + UserType +
+                '}';
+    }
+
+
+    public Users(Integer id, String userName, String password, int userType) {
+        this.id = id;
         this.userName = userName;
         this.password = password;
         UserType = userType;

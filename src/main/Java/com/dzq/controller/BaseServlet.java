@@ -31,31 +31,28 @@ public abstract class BaseServlet extends HttpServlet {
     /*
      *因为所有的子Servlet都要继承这个BaseServlet
      */
+    public abstract Class getServletClass();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
-  public abstract Class getServletClass();
+
     @Override
     protected void doPost(HttpServletRequest requset, HttpServletResponse response) throws ServletException, IOException {
 //获取用户的请求 请求中必须要携带一个参数 方法名称 methodName
         String methodName = requset.getParameter("methodName");
-        System.out.println("======先进入");
         //根据用户传递参数 确定了执行那个子Servlet中的这个methodName方法
         //用户需要指定的方法
         Method method = null;
         //执行方法的返回值
         Object result = null;
-        System.out.println(methodName+"-------------");
         if (methodName == null || "".equals(methodName)) {
             result = execute(requset, response);//统一返回到主页面
         } else {//证明有方法 先确定是哪个Servlet
                 //找到方法
                 try {
-                    System.out.println("ssssssss");
                     method = getServletClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
                     result = method.invoke(this, requset, response);
-                    System.out.println("=====》获取了需要返回的页面+result");
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -68,17 +65,13 @@ public abstract class BaseServlet extends HttpServlet {
 
     private void thView(HttpServletRequest requset, HttpServletResponse response, Object result) throws ServletException, IOException {
     if(result==null){
-        System.out.println("====没有返回值");
     }else{//要么Json要么字符串
         if(result instanceof  String ){
             String viewName=result.toString()+".jsp";
-            System.out.println("最终的跳转页面====》"+viewName);
             requset.getRequestDispatcher(viewName).forward(requset,response);
         }else{
             //返回的是Json
-            System.out.println("=======Json数据的处理");
             String resultJson =(String ) JSON.toJSONString(result) ;
-            System.out.println("json====="+resultJson);
             PrintWriter writer=response.getWriter();
             writer.write(resultJson);
             writer.flush();
