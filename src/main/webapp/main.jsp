@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="box-content">
-            <table class="table table-striped table-bordered bootstrap-datatable datatable">
+            <table class="table table-striped table-bordered 9bootstrap-datatable datatable">
                 <thead>
                 <tr>
                     <th>用户编号</th>
@@ -87,7 +87,7 @@
     <div class="modal-footer">
         <%--设置隐藏域，获取需要删除的id--%>
         <input type="hidden" id="deleteId" value="">
-        <a href="#" class="btn" data-dismiss="modal">关闭</a>
+        <a href="#" class="btn" data-dismiss="modal">关闭</a>i6i
         <a onClick="realDelete();" class="btn btn-primary">确认删除</a>
     </div>
 </div>

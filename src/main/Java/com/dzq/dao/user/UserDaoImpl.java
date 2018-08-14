@@ -18,8 +18,8 @@ public class UserDaoImpl extends BaseDao implements UserDao{
      */
     @Override
     public int add(Users users) {
-        String sql="INSERT INTO`user` (`username`,`password`,`userType`) VALUE(?,?,?)";
-       Object[] params ={users.getUserName(),users.getPassword(),users.getUserType()};
+        String sql="INSERT INTO `user` (`username`,`password`,`userType`,`file`) VALUES (?,?,?,?)";
+       Object[] params ={users.getUserName(),users.getPassword(),users.getUserType(),users.getFile()};
         return executeUpdate(sql,params);
     }
     /**
@@ -53,7 +53,23 @@ public class UserDaoImpl extends BaseDao implements UserDao{
         users = ResultSetUtil.eachOne(rs,Users.class);
         return users;
     }
-
+    /**
+     * 查询总记录数
+     */
+    @Override
+    public int findRownum() {
+        String sql="SELECT COUNT(1) AS COUNT FROM `user`";
+        rs=executeQuery(sql);
+        int count=0;
+        try {
+            if(rs.next()){
+                count=rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
+    }
     /**
      * 删除记录数
      */
@@ -79,23 +95,7 @@ public class UserDaoImpl extends BaseDao implements UserDao{
         return null;
     }
 
-    /**
-     * 查询总记录数
-     */
-    @Override
-    public int findRownum() {
-        String sql="SELECT COUNT(1) AS COUNT FROM `user`";
-        rs=executeQuery(sql);
-        int count=0;
-        try {
-            if(rs.next()){
-                count=rs.getInt("count");
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return count;
-    }
+
 
     /**
      *

@@ -29,6 +29,8 @@ public class PageUtil<E> {
     public void setPageIndex(int pageIndex) {
         this.pageIndex = (pageIndex==0)?1:pageIndex;
     }
+
+
     public int getPageSize() {
         return pageSize;
     }
@@ -46,6 +48,8 @@ public class PageUtil<E> {
     }
     public List<E> getList() { return list; }
     public void setList(List<E> list) { this.list = list; }
+
+
 
     public PageUtil(int pageIndex, int pageSize, int pageICount, int totalCount) {
         this.pageIndex = pageIndex;
@@ -66,5 +70,7 @@ public class PageUtil<E> {
                 ", totalCount=" + totalCount +
                 '}';
     }
-
+public static void main(String [] args){
+    System.out.println(System.getProperty("java.io.tmpdir"));
+}
 }

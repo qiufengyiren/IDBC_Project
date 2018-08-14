@@ -5,6 +5,11 @@ public class Users {
     private String userName;//用户名
     private String password;//密码
     private  int UserType;//类型
+    private String File;//上传文件
+
+    public String getFile() { return File; }
+
+    public void setFile(String file) { File = file; }
 
     public int getUserType() {
         return UserType;
@@ -45,14 +50,15 @@ public class Users {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", UserType=" + UserType +
+                ", File='" + File + '\'' +
                 '}';
     }
 
-
-    public Users(Integer id, String userName, String password, int userType) {
+    public Users(Integer id, String userName, String password, int userType, String file) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         UserType = userType;
+        File = file;
     }
 }
