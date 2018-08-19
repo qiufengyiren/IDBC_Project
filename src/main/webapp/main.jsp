@@ -62,6 +62,7 @@
                     <th>用户编号</th>
                     <th>用户名</th>
                     <th>用户类型</th>
+                    <th>文件路径</th>
                 </tr>
                 </thead>
                 <tbody id="list-content"></tbody>

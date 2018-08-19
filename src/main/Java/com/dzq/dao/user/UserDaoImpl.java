@@ -45,7 +45,7 @@ public class UserDaoImpl extends BaseDao implements UserDao{
      */
     @Override
     public Users login(String username, String password) {
-        String sql="SELECT `id`,`username`,`password`,`userType`FROM `user` WHERE `username`=? AND `password`=?";
+        String sql="SELECT `id`,`username`,`password`,`userType`,`file` FROM `user` WHERE `username`=? AND `password`=?";
         Object [] params={username,password};
         rs=executeQuery(sql,params);
         Users users;
@@ -104,7 +104,7 @@ public class UserDaoImpl extends BaseDao implements UserDao{
      */
     @Override
     public List<Users> findAllByPage(PageUtil util, Object... params) {
-        String sql="SELECT `id` AS `id`,`username`,`password`,`userType` FROM `user` LIMIT ?,?";
+        String sql="SELECT `id` AS `id`,`username`,`password`,`userType`,`file` FROM `user` LIMIT ?,?";
         Object[] objects={(util.getPageIndex()-1)*util.getPageSize(),util.getPageSize()};
         rs=executeQuery(sql,objects);
         List<Users> list=ResultSetUtil.eachList(rs,Users.class);
